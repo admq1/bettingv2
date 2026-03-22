@@ -3,14 +3,15 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* ./
+COPY package.json package-lock.json* ./
 RUN npm install --legacy-peer-deps
 
 COPY . .
 
-# Build with the backend URL injected at build time
-ARG REACT_APP_BACKEND_URL
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+# Set backend URL at build time
+ENV REACT_APP_BACKEND_URL=https://rudrabett.up.railway.app
+ENV NODE_ENV=production
+ENV CI=false
 
 RUN npm run build
 
@@ -19,7 +20,6 @@ FROM nginx:alpine
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
-# nginx config to support React Router (client-side routing)
 RUN echo 'server { \
     listen 80; \
     location / { \
