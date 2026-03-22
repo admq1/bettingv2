@@ -1,14 +1,14 @@
 # Stage 1: Build the React app
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
 RUN npm install --legacy-peer-deps
+RUN npm install ajv@^8 --legacy-peer-deps
 
 COPY . .
 
-# Set backend URL at build time
 ENV REACT_APP_BACKEND_URL=https://rudrabett.up.railway.app
 ENV NODE_ENV=production
 ENV CI=false
