@@ -9,5 +9,6 @@ COPY . .
 
 RUN mkdir -p /app/backend/uploads/payment_screenshots
 
-# Don't hardcode EXPOSE - Railway uses dynamic $PORT
-CMD ["sh", "-c", "uvicorn server:app --host 0.0.0.0 --port $PORT"]
+ENV PORT=8000
+
+CMD uvicorn server:app --host 0.0.0.0 --port 8000
