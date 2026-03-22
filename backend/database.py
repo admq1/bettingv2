@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-mongo_url = os.environ.get('MONGO_URL')
-db_name = os.environ.get('DB_NAME', 'rudrabet_db')
+mongo_url = os.environ.get('MONGO_URL', 'mongodb+srv://adityasinghd6_db_user:2yqcDD8hogFGUfMn@cluster0.jlhyh0k.mongodb.net/rudra_db?retryWrites=true&w=majority')
+db_name = os.environ.get('DB_NAME', 'rudra_db')
 
 client = AsyncIOMotorClient(mongo_url)
 db = client[db_name]
