@@ -19,7 +19,7 @@ const LoginModal = ({ open, onClose }) => {
       await login(loginData.username, loginData.password);
       onClose();
     } catch (error) {
-      // Error already handled in context
+      // Error handled in context
     } finally {
       setLoading(false);
     }
@@ -27,15 +27,13 @@ const LoginModal = ({ open, onClose }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (registerData.password !== registerData.confirmPassword) {
-      return;
-    }
+    if (registerData.password !== registerData.confirmPassword) return;
     setLoading(true);
     try {
       await register(registerData.username, registerData.email, registerData.password);
       onClose();
     } catch (error) {
-      // Error already handled in context
+      // Error handled in context
     } finally {
       setLoading(false);
     }
@@ -47,13 +45,13 @@ const LoginModal = ({ open, onClose }) => {
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-bold">Welcome to Rudrabet</DialogTitle>
         </DialogHeader>
-        
+
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Login</TabsTrigger>
             <TabsTrigger value="register">Register</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="login">
             <form onSubmit={handleLogin} className="space-y-4 mt-4">
               <div>
@@ -83,7 +81,7 @@ const LoginModal = ({ open, onClose }) => {
               </Button>
             </form>
           </TabsContent>
-          
+
           <TabsContent value="register">
             <form onSubmit={handleRegister} className="space-y-4 mt-4">
               <div>
